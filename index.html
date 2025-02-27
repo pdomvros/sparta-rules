@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Η ηγεμονία της Σπάρτης. Μια κυριαρχία σε αμφισβήτηση</title>
+  <title>Η ηγεμονία της Σπάρτης Μια κυριαρχία σε αμφισβήτηση</title>
 
   <!-- IMPORTING Comfortaa Bold -->
   <style>
@@ -27,27 +27,66 @@
     }
     .creator {
       margin-top: 10px;
-      /* Original 14px -> +25% ~ 17.5, we choose 18px */
+      /* Original 14px -> +25% ~ 17.5, choose 18px */
       font-size: 18px;
     }
+
+    /* SLIDESHOW STYLES */
+    .slideshow-container {
+      position: relative;
+      max-width: 72%; /* 80% - 10% => 72% as requested earlier */
+      margin: 30px auto; /* Center and some spacing */
+    }
+    .slide {
+      display: none;
+      width: 100%;
+    }
+    .active {
+      display: block;
+    }
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: auto;
+      padding: 16px;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      transition: 0.3s;
+      border-radius: 3px;
+      user-select: none;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .prev {
+      left: 10px;
+    }
+    .next {
+      right: 10px;
+    }
+    .prev:hover,
+    .next:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* QUIZ STYLES */
     .quiz-container {
       margin-top: 50px;
     }
     .quiz-subtitle {
       font-size: 24px;
-      font-weight: 700; /* Comfortaa bold */
       margin-bottom: 20px;
     }
     .question {
       font-size: 24px;
-      font-weight: 700;
       color: royalblue;
       margin-bottom: 20px;
       min-height: 120px;
     }
     .score-box {
       font-size: 20px;
-      font-weight: 700;
       color: gold;
       margin-top: 20px;
       padding: 10px;
@@ -71,9 +110,8 @@
       background-color: red;
       color: white;
     }
-
-    /* Feedback styling
-       Original ~18px -> +50% => 27px
+    /* FEEDBACK styling
+       Original ~18px -> +50% => ~27px
     */
     #feedback {
       margin-top: 15px;
@@ -84,26 +122,71 @@
   </style>
 </head>
 <body>
+
   <div class="creator">Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)</div>
   <div class="title">Η ηγεμονία της Σπάρτης Μια κυριαρχία σε αμφισβήτηση</div>
 
-  <!-- Embedding Audio for Correct / Wrong -->
+  <!-- EMBEDDING Audio for correct/wrong answers -->
   <audio id="success-sound" src="success-sound.mp3" preload="auto"></audio>
   <audio id="fail-sound" src="fail-sound.mp3" preload="auto"></audio>
 
+  <!-- SLIDESHOW START -->
+  <div class="slideshow-container">
+    <img class="slide active" src="Presentation -_Page_01.jpg" alt="Slide 1">
+    <img class="slide" src="Presentation -_Page_02.jpg" alt="Slide 2">
+    <img class="slide" src="Presentation -_Page_03.jpg" alt="Slide 3">
+    <img class="slide" src="Presentation -_Page_04.jpg" alt="Slide 4">
+    <img class="slide" src="Presentation -_Page_05.jpg" alt="Slide 5">
+    <img class="slide" src="Presentation -_Page_06.jpg" alt="Slide 6">
+    <img class="slide" src="Presentation -_Page_07.jpg" alt="Slide 7">
+    <img class="slide" src="Presentation -_Page_08.jpg" alt="Slide 8">
+    <img class="slide" src="Presentation -_Page_09.jpg" alt="Slide 9">
+    <img class="slide" src="Presentation -_Page_10.jpg" alt="Slide 10">
+    <img class="slide" src="Presentation -_Page_11.jpg" alt="Slide 11">
+    <img class="slide" src="Presentation -_Page_12.jpg" alt="Slide 12">
+    <img class="slide" src="Presentation -_Page_13.jpg" alt="Slide 13">
+    <img class="slide" src="Presentation -_Page_14.jpg" alt="Slide 14">
+    <img class="slide" src="Presentation -_Page_15.jpg" alt="Slide 15">
+    <img class="slide" src="Presentation -_Page_16.jpg" alt="Slide 16">
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+  <!-- SLIDESHOW END -->
+
+  <!-- QUIZ START -->
   <div class="quiz-container">
     <div class="quiz-subtitle">Ας δούμε τι θυμόμαστε ✨</div>
     <div id="question" class="question">Φόρτωση...</div>
-
     <button class="button" onclick="checkAnswer(true)">✅👍 Σωστό</button>
     <button class="button" onclick="checkAnswer(false)">❌👎 Λάθος</button>
-
     <div id="score" class="score-box">Σκορ: 0</div>
     <div id="feedback"></div>
   </div>
+  <!-- QUIZ END -->
 
   <script>
-    // 20 Questions: [text, correctAnswerBoolean, feedbackOnWrong]
+    /* ===================== SLIDESHOW SCRIPT ===================== */
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slide");
+
+    function showSlide(index) {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[index].style.display = "block";
+    }
+
+    function changeSlide(n) {
+      slideIndex += n;
+      if (slideIndex >= slides.length) slideIndex = 0;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      showSlide(slideIndex);
+    }
+
+    // Initialize first slide
+    showSlide(slideIndex);
+
+    /* ===================== QUIZ SCRIPT ===================== */
     let questions = [
       [
         "Οι Σπαρτιάτες υποστήριξαν δημοκρατικά κόμματα στις ελληνικές πόλεις μετά τη νίκη τους επί των Αθηναίων.",
@@ -240,16 +323,11 @@
           feedbackElement.innerText = "❌ Λάθος απάντηση: " + feedback + " 😢";
           failSound.play();
         }
-
         currentQuestion++;
         // Wait 4000 ms before loading the next question
         setTimeout(loadQuestion, 4000);
       }
     }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      loadQuestion();
-    });
   </script>
 </body>
 </html>
