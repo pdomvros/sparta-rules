@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Η ηγεμονία της Σπάρτης Μια κυριαρχία σε αμφισβήτηση</title>
+    <title>Η ηγεμονία της Σπάρτης. Μια κυριαρχία σε αμφισβήτηση</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
         body {
@@ -43,6 +43,7 @@
             cursor: pointer;
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             width: auto;
             padding: 16px;
             color: white;
@@ -51,9 +52,10 @@
             transition: 0.3s;
             border-radius: 3px;
             user-select: none;
+            background-color: rgba(0, 0, 0, 0.5);
         }
-        .prev { left: 0; }
-        .next { right: 0; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
         .prev:hover, .next:hover { background-color: rgba(255, 255, 255, 0.5); }
     </style>
 </head>
@@ -82,13 +84,23 @@
     </div>
     <script>
         let slideIndex = 0;
-        function changeSlide(n) {
-            let slides = document.getElementsByClassName("slide");
-            slides[slideIndex].classList.remove("active");
-            slideIndex = (slideIndex + n + slides.length) % slides.length;
-            slides[slideIndex].classList.add("active");
+        let slides = document.getElementsByClassName("slide");
+        
+        function showSlide(index) {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[index].style.display = "block";
         }
+        
+        function changeSlide(n) {
+            slideIndex += n;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            if (slideIndex < 0) slideIndex = slides.length - 1;
+            showSlide(slideIndex);
+        }
+        
+        showSlide(slideIndex);
     </script>
 </body>
 </html>
-
