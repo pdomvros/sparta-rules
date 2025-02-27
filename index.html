@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Η ηγεμονία της Σπάρτης Μια κυριαρχία σε αμφισβήτηση</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .title {
+            font-family: 'Comfortaa', cursive;
+            font-size: 28px;
+            font-weight: bold;
+            font-style: italic;
+            color: gold;
+            margin-top: 20px;
+        }
+        .creator {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 80%;
+            margin: auto;
+            margin-top: 30px;
+        }
+        .slide {
+            display: none;
+            width: 100%;
+        }
+        .active {
+            display: block;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            border-radius: 3px;
+            user-select: none;
+        }
+        .prev { left: 0; }
+        .next { right: 0; }
+        .prev:hover, .next:hover { background-color: rgba(255, 255, 255, 0.5); }
+    </style>
+</head>
+<body>
+    <div class="creator">Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)</div>
+    <div class="title">Η ηγεμονία της Σπάρτης Μια κυριαρχία σε αμφισβήτηση</div>
+    <div class="slideshow-container">
+        <img class="slide active" src="Presentation -_Page_01.jpg">
+        <img class="slide" src="Presentation -_Page_02.jpg">
+        <img class="slide" src="Presentation -_Page_03.jpg">
+        <img class="slide" src="Presentation -_Page_04.jpg">
+        <img class="slide" src="Presentation -_Page_05.jpg">
+        <img class="slide" src="Presentation -_Page_06.jpg">
+        <img class="slide" src="Presentation -_Page_07.jpg">
+        <img class="slide" src="Presentation -_Page_08.jpg">
+        <img class="slide" src="Presentation -_Page_09.jpg">
+        <img class="slide" src="Presentation -_Page_10.jpg">
+        <img class="slide" src="Presentation -_Page_11.jpg">
+        <img class="slide" src="Presentation -_Page_12.jpg">
+        <img class="slide" src="Presentation -_Page_13.jpg">
+        <img class="slide" src="Presentation -_Page_14.jpg">
+        <img class="slide" src="Presentation -_Page_15.jpg">
+        <img class="slide" src="Presentation -_Page_16.jpg">
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+    </div>
+    <script>
+        let slideIndex = 0;
+        function changeSlide(n) {
+            let slides = document.getElementsByClassName("slide");
+            slides[slideIndex].classList.remove("active");
+            slideIndex = (slideIndex + n + slides.length) % slides.length;
+            slides[slideIndex].classList.add("active");
+        }
+    </script>
+</body>
+</html>
 
