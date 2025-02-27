@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Η ηγεμονία της Σπάρτης Μια κυριαρχία σε αμφισβήτηση</title>
+  <title>Η ηγεμονία της Σπάρτης – Παρουσίαση</title>
 
   <!-- IMPORTING Comfortaa Bold -->
   <style>
@@ -18,6 +18,7 @@
       margin: 0;
       padding: 0;
     }
+
     .title {
       font-size: 28px;
       font-weight: 700;
@@ -27,19 +28,20 @@
     }
     .creator {
       margin-top: 10px;
-      /* Original 14px -> +25% ~ 17.5, choose 18px */
-      font-size: 18px;
+      font-size: 18px; /* 14px + 25% approx */
     }
 
     /* SLIDESHOW STYLES */
     .slideshow-container {
       position: relative;
-      max-width: 72%; /* 80% - 10% => 72% as requested earlier */
-      margin: 30px auto; /* Center and some spacing */
+      /* Αρχικό ήταν 80%. Μειώνουμε κατά 20% => 80% * 0.8 = 64% */
+      max-width: 64%;
+      margin: 30px auto; /* κεντράρισμα με λίγο κενό επάνω/κάτω */
     }
     .slide {
       display: none;
       width: 100%;
+      height: auto;
     }
     .active {
       display: block;
@@ -71,64 +73,35 @@
       background-color: rgba(255, 255, 255, 0.5);
     }
 
-    /* QUIZ STYLES */
-    .quiz-container {
-      margin-top: 50px;
-    }
-    .quiz-subtitle {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    .question {
-      font-size: 24px;
-      color: royalblue;
-      margin-bottom: 20px;
-      min-height: 120px;
-    }
-    .score-box {
-      font-size: 20px;
-      color: gold;
-      margin-top: 20px;
-      padding: 10px;
-      border: 2px solid gold;
+    /* GOLD BUTTON STYLE */
+    .gold-button {
+      margin-top: 30px;
+      margin-bottom: 50px; 
       display: inline-block;
-      border-radius: 10px;
-    }
-    .button {
-      font-size: 18px;
+      background-color: gold;
+      color: black;
+      font-size: 20px;
+      font-family: 'Comfortaa', cursive;
+      font-weight: 700;
+      text-decoration: none;
       padding: 10px 20px;
-      margin: 5px;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
+      border-radius: 10px;
+      transition: background-color 0.3s;
     }
-    .button.correct {
-      background-color: green;
-      color: white;
-    }
-    .button.incorrect {
-      background-color: red;
-      color: white;
-    }
-    /* FEEDBACK styling
-       Original ~18px -> +50% => ~27px
-    */
-    #feedback {
-      margin-top: 15px;
-      font-size: 27px;
-      color: #ff8080; /* Light red for clarity */
-      min-height: 50px;
+    .gold-button:hover {
+      background-color: #ffdd00;
     }
   </style>
 </head>
 <body>
 
+  <!-- Δημιουργός -->
   <div class="creator">Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)</div>
-  <div class="title">Η ηγεμονία της Σπάρτης Μια κυριαρχία σε αμφισβήτηση</div>
-
-  <!-- EMBEDDING Audio for correct/wrong answers -->
-  <audio id="success-sound" src="success-sound.mp3" preload="auto"></audio>
-  <audio id="fail-sound" src="fail-sound.mp3" preload="auto"></audio>
+  
+  <!-- Τίτλος -->
+  <div class="title">
+    Η ηγεμονία της Σπάρτης: Μια κυριαρχία σε αμφισβήτηση
+  </div>
 
   <!-- SLIDESHOW START -->
   <div class="slideshow-container">
@@ -153,27 +126,21 @@
   </div>
   <!-- SLIDESHOW END -->
 
-  <!-- QUIZ START -->
-  <div class="quiz-container">
-    <div class="quiz-subtitle">Ας δούμε τι θυμόμαστε ✨</div>
-    <div id="question" class="question">Φόρτωση...</div>
-    <button class="button" onclick="checkAnswer(true)">✅👍 Σωστό</button>
-    <button class="button" onclick="checkAnswer(false)">❌👎 Λάθος</button>
-    <div id="score" class="score-box">Σκορ: 0</div>
-    <div id="feedback"></div>
-  </div>
-  <!-- QUIZ END -->
+  <!-- GOLD BUTTON linking to external URL -->
+  <a class="gold-button" href="https://pdomvros.github.io/sparta-rules-pr/" target="_blank">
+    Περισσότερα εδώ!
+  </a>
 
   <script>
     /* ===================== SLIDESHOW SCRIPT ===================== */
     let slideIndex = 0;
-    const slides = document.getElementsByClassName("slide");
+    const slides = document.getElementsByClassName('slide');
 
     function showSlide(index) {
       for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+        slides[i].style.display = 'none';
       }
-      slides[index].style.display = "block";
+      slides[index].style.display = 'block';
     }
 
     function changeSlide(n) {
@@ -185,149 +152,6 @@
 
     // Initialize first slide
     showSlide(slideIndex);
-
-    /* ===================== QUIZ SCRIPT ===================== */
-    let questions = [
-      [
-        "Οι Σπαρτιάτες υποστήριξαν δημοκρατικά κόμματα στις ελληνικές πόλεις μετά τη νίκη τους επί των Αθηναίων.",
-        false,
-        "Οι Σπαρτιάτες υποστήριξαν ολιγαρχικά κόμματα στις πόλεις." 
-      ],
-      [
-        "Στην Αθήνα, το ολιγαρχικό καθεστώς των Τριάκοντα Τυράννων επιβλήθηκε με την υποστήριξη της Σπάρτης.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Ο Κύρος ήταν βασιλιάς της Περσίας και ξεκίνησε την εκστρατεία γνωστή ως Κύρου Ανάβασις.",
-        false,
-        "Ο Κύρος δεν ήταν βασιλιάς, αλλά σατράπης της Μικράς Ασίας." 
-      ],
-      [
-        "Ο Αγησίλαος ήταν βασιλιάς της Σπάρτης και ηγήθηκε εκστρατείας στην Ασία.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Ο Βοιωτικός-Κορινθιακός πόλεμος οδήγησε στη ναυτική ήττα των Αθηναίων στην Κνίδο.",
-        false,
-        "Η ήττα στην Κνίδο ήταν των Σπαρτιατών, όχι των Αθηναίων." 
-      ],
-      [
-        "Η Ανταλκίδειος ειρήνη (386 π.Χ.) κατοχύρωσε την ανεξαρτησία των ελληνικών πόλεων από τους Πέρσες.",
-        false,
-        "Οι Πέρσες έγιναν διαιτητές των ελληνικών πραγμάτων." 
-      ],
-      [
-        "Η Θήβα ήταν σύμμαχος της Σπάρτης κατά τη διάρκεια του Πελοποννησιακού πολέμου.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Το 382 π.Χ., η Σπάρτη επέβαλε δημοκρατικό πολίτευμα στη Θήβα.",
-        false,
-        "Η Σπάρτη επέβαλε ολιγαρχικό, όχι δημοκρατικό πολίτευμα στη Θήβα." 
-      ],
-      [
-        "Ο Ιερός Λόχος ήταν μια ελίτ στρατιωτική μονάδα που σχηματίστηκε από τον Πελοπίδα.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Ο Επαμεινώνδας εισήγαγε τη στρατηγική της λοξής φάλαγγας στη μάχη των Λεύκτρων.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Στη μάχη της Μαντίνειας (362 π.Χ.), ο Πελοπίδας νίκησε τους Σπαρτιάτες.",
-        false,
-        "Ο Πελοπίδας είχε ήδη σκοτωθεί στη Θεσσαλία, η μάχη ήταν υπό τον Επαμεινώνδα." 
-      ],
-      [
-        "Ο Πελοπίδας και ο Επαμεινώνδας ήταν ηγέτες της Σπάρτης.",
-        false,
-        "Ήταν ηγέτες της Θήβας, όχι της Σπάρτης." 
-      ],
-      [
-        "Η Θήβα εγκατέλειψε την Πελοπόννησο μετά τη μάχη της Μαντίνειας.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Η Ανταλκίδειος ειρήνη υπογράφηκε μεταξύ Αθήνας και Σπάρτης.",
-        false,
-        "Υπογράφηκε από τη Σπάρτη με την Περσία, επηρεάζοντας όλες τις ελληνικές πόλεις." 
-      ],
-      [
-        "Ο Αθηναίος στρατηγός Κόνων χρησιμοποίησε περσικά χρήματα για να ανακατασκευάσει τα Μακρά Τείχη.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Οι Θηβαίοι κατέστρεψαν ολοκληρωτικά την πόλη της Σπάρτης μετά τη μάχη των Λεύκτρων.",
-        false,
-        "Η Θήβα νίκησε, αλλά δεν κατέστρεψε τη Σπάρτη." 
-      ],
-      [
-        "Ο Θρασύβουλος ηγήθηκε της εξέγερσης που ανέτρεψε τους Τριάκοντα Τυράννους στην Αθήνα.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Η Β’ Αθηναϊκή Συμμαχία σχηματίστηκε το 378 π.Χ. ως αντίδραση στη σπαρτιατική ηγεμονία.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Ο Επαμεινώνδας ίδρυσε τη Μεγαλόπολη στην Πελοπόννησο.",
-        true,
-        "Σωστό!"
-      ],
-      [
-        "Μετά τον Πελοποννησιακό πόλεμο, η Σπάρτη αναδείχθηκε ως η μόνη ελληνική δύναμη χωρίς αντίπαλο.",
-        false,
-        "Η ηγεμονία της Σπάρτης αμφισβητήθηκε από τη Θήβα και άλλες πόλεις." 
-      ]
-    ];
-
-    let currentQuestion = 0;
-    let score = 0;
-
-    function loadQuestion() {
-      let questionElement = document.getElementById("question");
-      let feedbackElement = document.getElementById("feedback");
-
-      feedbackElement.innerText = ""; // Clear feedback
-
-      if (currentQuestion < questions.length) {
-        questionElement.innerText = questions[currentQuestion][0];
-      } else {
-        questionElement.innerText = "Τέλος! Το σκορ σου: " + score;
-      }
-    }
-
-    function checkAnswer(answer) {
-      if (currentQuestion < questions.length) {
-        let correct = questions[currentQuestion][1];
-        let feedback = questions[currentQuestion][2];
-        let feedbackElement = document.getElementById("feedback");
-        let successSound = document.getElementById("success-sound");
-        let failSound = document.getElementById("fail-sound");
-
-        if (answer === correct) {
-          score++;
-          document.getElementById("score").innerText = "Σκορ: " + score;
-          feedbackElement.innerText = "🎉✅ Μπράβο!";
-          successSound.play();
-        } else {
-          feedbackElement.innerText = "❌ Λάθος απάντηση: " + feedback + " 😢";
-          failSound.play();
-        }
-        currentQuestion++;
-        // Wait 4000 ms before loading the next question
-        setTimeout(loadQuestion, 4000);
-      }
-    }
   </script>
 </body>
 </html>
